@@ -65,6 +65,7 @@ button { font-family: inherit; cursor: pointer; }
   display: flex; align-items: center; gap: 10px; background: none; border: 0; color: var(--text);
   font-weight: 900; font-size: 1.15em; letter-spacing: 0.02em;
 }
+.brand-text { white-space: nowrap; }
 .brand-icon { font-size: 1.4em; filter: drop-shadow(0 4px 10px rgba(255, 209, 102, 0.4)); }
 .topbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .chip {
@@ -75,6 +76,12 @@ button { font-family: inherit; cursor: pointer; }
 .chip:hover { transform: translateY(-1px); background: rgba(255, 255, 255, 0.12); }
 .chip.on { background: var(--accent); color: #1a1a2e; border-color: var(--accent); }
 .chip-ghost { opacity: 0.7; }
+
+@media (max-width: 520px) {
+  .topbar { padding: 10px 12px; }
+  .brand { font-size: 1em; }
+  .chip { padding: 6px 10px; font-size: 0.8em; }
+}
 
 /* ===== 畫面切換 ===== */
 .app { max-width: 1040px; margin: 0 auto; padding: clamp(16px, 3vw, 36px) clamp(16px, 4vw, 40px) 60px; }
@@ -204,7 +211,8 @@ button { font-family: inherit; cursor: pointer; }
 }
 .qtype { color: var(--muted); font-size: 0.85em; font-weight: 700; letter-spacing: 0.15em; }
 .qtext { font-size: clamp(1.25em, 2.4vw, 1.6em); font-weight: 900; margin: 8px 0 22px; line-height: 1.45; }
-.options { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 640px) { .options { grid-template-columns: 1fr; } }
 .options.tf { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
 .opt {
   display: flex; align-items: center; gap: 14px; text-align: left; padding: 16px 18px;

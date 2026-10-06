@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>個資保衛戰｜個資資安事件風險與應對 課間測驗</title>
+  <meta name="description" content="以故事闖關方式複習「個資資安事件風險與應對」課程：釣魚簡訊、密碼撞庫、社交工程、FIDO 零信任、AI 與個資、個資法與檢警合作。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+</head>
+<body>
+  <div class="bg-orbs" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+
+  <header class="topbar">
+    <button class="brand" id="btn-home" title="回首頁">
+      <span class="brand-icon">🛡️</span>
+      <span class="brand-text">個資保衛戰</span>
+    </button>
+    <div class="topbar-actions">
+      <button class="chip" id="btn-big" title="放大字體，適合投影">🖥️ 投影模式</button>
+      <button class="chip" id="btn-map" title="關卡地圖">🗺️ 關卡</button>
+      <button class="chip chip-ghost" id="btn-reset" title="清除闖關紀錄">🔄 重設</button>
+    </div>
+  </header>
+
+  <main class="app" id="app">
+
+    <!-- ===== 首頁 ===== -->
+    <section class="screen active" id="screen-home">
+      <div class="hero">
+        <div class="hero-art" id="hero-art"></div>
+        <h1 class="hero-title">個資保衛戰</h1>
+        <p class="hero-sub">個資資安事件風險與應對 · 課間趣味測驗</p>
+        <p class="hero-desc">
+          跟著新進員工<strong>小安</strong>，走過 8 個真實改編的個資外洩與詐騙現場。<br />
+          每一關都是一段故事，故事的結局，由你的選擇決定。
+        </p>
+        <div class="mode-grid">
+          <button class="mode-card" id="btn-story-mode">
+            <span class="mode-icon">📖</span>
+            <span class="mode-name">故事闖關</span>
+            <span class="mode-desc">8 個章節 · 60 題<br />可自由選關，附完整解析</span>
+          </button>
+          <button class="mode-card alt" id="btn-quick-mode">
+            <span class="mode-icon">⚡</span>
+            <span class="mode-name">快問快答</span>
+            <span class="mode-desc">隨機抽 10 題 · 每題 20 秒<br />適合課間搶答</span>
+          </button>
+        </div>
+        <p class="hero-foot">題目依據 葉耀群主任檢察官「個資資安事件風險與應對」課程內容延伸設計</p>
+      </div>
+    </section>
+
+    <!-- ===== 關卡地圖 ===== -->
+    <section class="screen" id="screen-map">
+      <div class="map-head">
+        <h2>關卡地圖</h2>
+        <p id="map-summary"></p>
+      </div>
+      <div class="level-grid" id="level-grid"></div>
+      <div class="map-foot" id="map-foot"></div>
+    </section>
+
+    <!-- ===== 故事 ===== -->
+    <section class="screen" id="screen-story">
+      <div class="story-wrap">
+        <div class="story-art" id="story-art"></div>
+        <div class="story-panel">
+          <div class="story-tag" id="story-tag"></div>
+          <h2 class="story-title" id="story-title"></h2>
+          <div class="story-text" id="story-text"></div>
+          <div class="story-actions">
+            <button class="btn btn-ghost" id="btn-story-skip">跳過故事</button>
+            <button class="btn btn-primary" id="btn-story-next">繼續 ▸</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 測驗 ===== -->
+    <section class="screen" id="screen-quiz">
+      <div class="quiz-head">
+        <div class="quiz-level" id="quiz-level"></div>
+        <div class="quiz-meta">
+          <span class="pill" id="quiz-progress-text">1 / 7</span>
+          <span class="pill pill-score" id="quiz-score">⭐ 0</span>
+          <span class="pill pill-timer hidden" id="quiz-timer">⏱ 20</span>
+        </div>
+      </div>
+      <div class="progress"><div class="progress-bar" id="quiz-progress-bar"></div></div>
+
+      <div class="qcard" id="qcard">
+        <div class="qtype" id="qtype">單選題</div>
+        <h2 class="qtext" id="qtext"></h2>
+        <div class="options" id="options"></div>
+      </div>
+
+      <div class="explain hidden" id="explain">
+        <div class="explain-head" id="explain-head"></div>
+        <p class="explain-body" id="explain-body"></p>
+        <div class="explain-actions">
+          <button class="btn btn-primary" id="btn-next">下一題 ▸</button>
+        </div>
+      </div>
+      <p class="kbd-hint">鍵盤：<kbd>1</kbd>–<kbd>4</kbd> 作答 · <kbd>Enter</kbd> 下一題</p>
+    </section>
+
+    <!-- ===== 關卡結算 ===== -->
+    <section class="screen" id="screen-level-result">
+      <div class="result-card">
+        <div class="stars" id="result-stars"><span>★</span><span>★</span><span>★</span></div>
+        <h2 id="result-title"></h2>
+        <p class="result-score" id="result-score"></p>
+        <p class="result-msg" id="result-msg"></p>
+        <div class="result-actions">
+          <button class="btn btn-ghost" id="btn-result-map">🗺️ 關卡地圖</button>
+          <button class="btn btn-ghost" id="btn-result-retry">🔁 再挑戰</button>
+          <button class="btn btn-primary" id="btn-result-next">下一關 ▸</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 結業 ===== -->
+    <section class="screen" id="screen-final">
+      <canvas id="confetti"></canvas>
+      <div class="final-card">
+        <div class="final-icon" id="final-icon">🏆</div>
+        <div class="final-label">結業稱號</div>
+        <h2 class="final-rank" id="final-rank"></h2>
+        <p class="final-score" id="final-score"></p>
+        <p class="final-desc" id="final-desc"></p>
+        <div class="final-breakdown" id="final-breakdown"></div>
+        <div class="result-actions">
+          <button class="btn btn-ghost" id="btn-final-copy">📋 複製成績</button>
+          <button class="btn btn-primary" id="btn-final-home">回首頁</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <span>個資保衛戰 · 課間互動測驗</span>
+    <span class="dot">·</span>
+    <span>純前端、無需登入、不蒐集任何個資 😉</span>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/questions.js"></script>
+  <script src="js/scenes.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
